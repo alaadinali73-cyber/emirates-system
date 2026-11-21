@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>كلية الإمارات للعلوم والتكنولوجيا</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Cairo',Tahoma,sans-serif}
+body{background:#0A1931;color:#fff;direction:rtl}
+/* كحلي + ذهبي فقط - زي الصورة */
+:root{--navy:#0A1931;--navy2:#122A52;--navy3:#1A365D;--gold:#C9A227;--gold2:#E6C84A;--goldBtn:#D9A400}
+.topLine{height:2px;background:var(--gold)}
+header{background:#0A1931;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--gold);position:sticky;top:0;z-index:20}
+header .right{display:flex;align-items:center;gap:10px}
+header img{width:44px;height:44px;border-radius:50%;background:#fff;padding:2px;object-fit:cover;border:2px solid var(--gold)}
+header h1{font-size:15px}
+header .icons{display:flex;gap:8px;align-items:center}
+header .icons button{width:36px;height:36px;border-radius:50%;background:transparent;border:1px solid #444;color:#fff;cursor:pointer}
+header .icons .goldBtn{width:auto;padding:7px 14px;border-radius:20px;background:var(--gold);color:#0A1931;border:none;font-weight:800;font-size:13px}
+.alert{background:var(--navy2);border-bottom:1px solid var(--gold);color:#fff;padding:10px 14px;text-align:center;font-size:12.5px;line-height:1.7}
+.alert b{color:var(--gold2)}
+.container{max-width:650px;margin:0 auto;padding:0 14px 20px}
+.screen{display:none}
+.screen.active{display:block}
+.hero{text-align:center;padding:28px 10px 14px}
+.badge{display:inline-block;border:1px solid #444;border-radius:25px;padding:7px 16px;font-size:13px;color:#ddd}
+.badge i{color:#1FA34A;font-style:normal}
+.hero h1{font-size:30px;line-height:1.4;margin:16px 0 8px}
+.hero h1 span{color:var(--gold2);display:block}
+.hero p{color:#D0D0D0;font-size:14px;line-height:1.8}
+.btn-gold{display:block;width:100%;background:linear-gradient(135deg,#C9A227,#E6C84A);color:#0A1931;border:none;padding:15px;border-radius:30px;font-size:17px;font-weight:800;cursor:pointer;margin-top:18px}
+.btn-gold2{display:block;width:100%;background:var(--goldBtn);color:#0A1931;border:none;padding:15px;border-radius:30px;font-size:17px;font-weight:800;cursor:pointer;margin-top:18px}
+.btn-outline{display:block;width:100%;background:transparent;border:1.5px solid var(--gold);color:#fff;padding:14px;border-radius:30px;font-size:17px;cursor:pointer;margin-top:10px}
+.btn-navy{display:block;width:100%;background:var(--navy2);color:var(--gold2);border:1px solid var(--gold);padding:13px;border-radius:30px;font-weight:800;cursor:pointer;margin-top:10px}
+.btn-white{display:block;width:100%;background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.2);padding:13px;border-radius:30px;cursor:pointer;margin-top:10px}
+.stats{display:flex;justify-content:space-around;border-top:1px solid #333;margin-top:22px;padding-top:16px;text-align:center}
+.stats b{color:var(--gold2);font-size:20px}
+.stats span{color:#ccc;font-size:13px}
+/* قائمة زي الصورة */
+.menu{margin-top:16px}
+.menu a{display:flex;justify-content:space-between;align-items:center;background:var(--navy2);border-radius:14px;padding:15px 16px;margin-bottom:10px;text-decoration:none;color:#fff;font-weight:700;cursor:pointer}
+.menu a:hover{background:var(--gold);color:#0A1931}
+.menu a:hover span{color:#0A1931}
+.menu a span{color:var(--gold2)}
+.card{background:var(--navy2);border-radius:20px;padding:20px;margin-top:16px}
+.card h2{text-align:center;font-size:22px}
+.card h2 span{color:var(--gold2)}
+.subtitle{text-align:center;color:#ccc;font-size:13px;margin:8px 0 14px}
+label{font-weight:700;font-size:14px;display:block;margin:14px 0 8px;color:#fff}
+input,select{width:100%;padding:12px;border:1px solid #333;border-radius:12px;background:#0A1931;color:#fff;outline:none}
+input:focus{border-color:var(--gold);background:var(--navy2)}
+input::placeholder{color:#888}
+small{color:#999;font-size:12px}
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.choices button,.list button{padding:12px;border:1px solid #333;border-radius:12px;background:#0A1931;cursor:pointer;font-weight:700;color:#fff}
+.choices button.selected,.list button.selected{background:var(--gold);color:#0A1931;border-color:var(--gold)}
+.list button{width:100%;margin-bottom:9px}
+.steps{display:flex;align-items:center;margin:14px 0;direction:ltr}
+.steps .dot{width:36px;height:36px;border-radius:50%;background:#333;color:#ccc;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0}
+.steps .dot.active{background:var(--gold);color:#0A1931}
+.steps .line{flex:1;height:2px;background:#333;margin:0 8px}
+.steps .line.done{background:var(--gold)}
+.row{display:flex;align-items:center;gap:10px;margin-bottom:11px}
+.row label{width:120px;text-align:left;margin:0}
+.row input,.row select{flex:1}
+.btns{display:flex;gap:10px;margin-top:14px}
+.btns button{flex:1}
+.pay-methods{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.pay-methods button{padding:12px 6px;background:#0A1931;border:1px solid #333;color:#fff;border-radius:14px;font-weight:800;cursor:pointer}
+.pay-methods button.selected{background:var(--gold);color:#0A1931}
+.pay-methods small{display:block;font-weight:400;color:#aaa}
+.summary{background:rgba(201,162,39,.12);border:1px solid var(--gold);border-radius:14px;padding:14px;margin:12px 0}
+.summary div{display:flex;justify-content:space-between;padding:5px 0;font-size:14px}
+.summary .total{font-weight:800;border-top:1px dashed var(--gold);padding-top:10px;color:var(--gold2)}
+table{width:100%;border-collapse:collapse;margin-top:10px}
+th{background:#0A1931;color:var(--gold2);padding:11px;font-size:13px}
+td{padding:11px;text-align:center;border-bottom:1px solid #333;font-size:14px}
+td button{padding:6px 12px;font-size:13px;border-radius:20px}
+button.danger{background:#4A1A1A;color:#FFB0B0;border:1px solid #6A2A2A}
+.pagination{display:flex;gap:10px;justify-content:center;margin-top:14px;align-items:center;color:#ccc}
+.cards2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.cards2 .c{background:#0A1931;border-radius:14px;padding:14px;text-align:center;border-top:4px solid var(--gold)}
+.cards2 h3{font-size:22px;color:var(--gold2)}
+.footer{background:#081226;border-top:1px solid var(--gold);padding:20px 14px;margin-top:20px;text-align:center}
+.footer h3{display:flex;align-items:center;justify-content:center;gap:10px}
+.footer h3 img{width:42px;height:42px;border-radius:50%;background:#fff;padding:2px;border:2px solid var(--gold)}
+.footer p{color:#aaa;font-size:13px;line-height:1.8;margin-top:8px}
+.footer .gold{color:var(--gold2);font-weight:700}
+.photo-box{width:100%;background:#0A1931;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:18px;color:#aaa;gap:8px}
+.photo-box .icon{width:80px;height:80px;background:var(--navy2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:34px;color:#fff}
+</style>
+</head>
+<body>
+<div class="topLine"></div>
+<header>
+  <div class="icons"><button onclick="show('home')">🌙</button><button onclick="show('home')">☰</button><button class="goldBtn" onclick="show('login')">تسجيل الدخول</button></div>
+  <div class="right"><div><h1>كلية الإمارات للـ..</h1></div><img src="logo.png" alt="شعار كلية الإمارات"></div>
+</header>
+<div class="alert">يتم توريد الرسوم في حسابات الكلية عبر <b>بنك فيصل الإسلامي</b> فقط - رقم الحساب <b>(134014447)</b> - <b>(تطبيق فوري)</b> - الآن الدفع إلكترونياً داخل النظام ✅</div>
+
+<div class="container">
+
+  <!-- ===== الرئيسية - زي الصورة بالضبط ===== -->
+  <div id="home" class="screen active">
+    <div class="hero">
+      <div class="badge"><i>●</i> رائدة في التعليم والبحث العلمي</div>
+      <h1>كلية الإمارات للعلوم<br>والتكنولوجيا<span>للعلوم والتكنولوجيا</span></h1>
+      <p>نقدم برامج أكاديمية متميزة في مجالات العلوم والتكنولوجيا، ونؤهل جيلاً من القادة والمبدعين لمواجهة تحديات المستقبل.</p>
+      <button class="btn-gold2" onclick="show('dashboard')">🎓 استعراض البرامج</button>
+      <button class="btn-outline" onclick="show('about')">ⓘ تعرف علينا</button>
+      <div class="stats"><div><b>15,003+</b><br><span>طالب</span></div><div><b>+6</b><br><span>عضو هيئة تدريس</span></div><div><b>+4</b><br><span>برنامج أكاديمي</span></div></div>
+    </div>
+    <div class="menu">
+      <a onclick="show('dashboard')">لوحة التحكم - نظام التسجيل <span>›</span></a>
+      <a onclick="show('students')">إدارة الطلاب <span>›</span></a>
+      <a onclick="show('add')">إضافة طالب جديد <span>›</span></a>
+      <a onclick="show('pay')">الرسوم الدراسية <span>›</span></a>
+      <a onclick="show('reports')">عرض التقارير <span>›</span></a>
+      <a onclick="show('login')">تسجيل الدخول <span>›</span></a>
+      <a onclick="show('cert')">تقديم جديد - طلب شهادة <span>›</span></a>
+      <a onclick="show('track')">متابعة الطلب <span>›</span></a>
+    </div>
+  </div>
+
+  <!-- ===== تعرف علينا ===== -->
+  <div id="about" class="screen">
+    <div class="card"><h2>تعرف <span>علينا</span></h2><p class="subtitle">تأسست عام 2000 - الخرطوم - الجريف غرب - شارع الستين شرق</p><p style="text-align:center;line-height:1.9;color:#D0D0D0">كلية الإمارات للعلوم والتكنولوجيا - رائدة في التعليم والبحث العلمي. نقدم برامج الدبلوم والبكالوريوس والماجستير.</p><button class="btn-gold" onclick="show('home')">🏠 الرئيسية</button><button class="btn-outline" onclick="show('cert')">تقديم جديد</button></div>
+  </div>
+
+  <!-- ===== لوحة التحكم ===== -->
+  <div id="dashboard" class="screen">
+    <div class="hero"><div class="badge">● لوحة التحكم</div><h1>نظام إدارة<br><span>تسجيل الطلاب</span></h1><p>تطوير إدارة تسجيل الطلاب - دراسة حالة كلية الإمارات</p><button class="btn-gold2" onclick="show('add')">+ إضافة طالب جديد</button><button class="btn-outline" onclick="show('students')">عرض الطلاب</button><div class="stats"><div><b id="totalStudents">0</b><br><span>طالب</span></div><div><b>84</b><br><span>عضو هيئة تدريس</span></div><div><b id="totalFees">0</b><br><span>الرسوم المحصلة</span></div></div></div>
+    <div class="menu"><a onclick="show('add')">إضافة طالب <span>›</span></a><a onclick="show('students')">إدارة الطلاب <span>›</span></a><a onclick="show('pay')">الدفع الإلكتروني <span>›</span></a><a onclick="show('reports')">عرض التقارير <span>›</span></a><a onclick="show('settings')">إعدادات النظام <span>›</span></a><a onclick="show('home')">🏠 الرئيسية <span>›</span></a></div>
+  </div>
+
+  <!-- ===== إضافة طالب - زي الوايرفريم ===== -->
+  <div id="add" class="screen">
+    <div class="card"><h2>إضافة <span>طالب جديد</span></h2><p class="subtitle">صورة الطالب + بيانات الطالب</p>
+      <div class="photo-box"><div class="icon">👤</div><b>صورة الطالب</b><span style="font-size:13px">اختر صورة</span><button class="btn-white" style="width:auto;padding:8px 18px" onclick="alert('اختر صورة من جهازك')">رفع صورة</button></div>
+      <form onsubmit="saveStudent(event)">
+        <div class="row"><input id="name" required><label>اسم الطالب :</label></div>
+        <div class="row"><input id="sid" required><label>الرقم الجامعي :</label></div>
+        <div class="row"><select id="dept"><option>اختر القسم</option><option>علوم الحاسوب</option><option>الهندسة</option><option>إدارة الأعمال</option><option>تقنية المعلومات</option></select><label>القسم :</label></div>
+        <div class="row"><select id="level"><option>اختر المستوى</option><option>الأول</option><option>الثاني</option><option>الثالث</option><option>الرابع</option></select><label>المستوى الدراسي :</label></div>
+        <div class="row"><input id="email" type="email"><label>البريد الإلكتروني :</label></div>
+        <div class="row"><input id="phone"><label>رقم الهاتف :</label></div>
+        <div class="row"><input id="fee" type="number" value="25000"><label>الرسوم :</label></div>
+        <div class="btns"><button class="btn-gold">حفظ البيانات</button><button type="button" class="btn-white" onclick="show('students')">إلغاء</button></div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===== عرض الطلاب ===== -->
+  <div id="students" class="screen">
+    <div class="card"><h2>عرض <span>الطلاب</span></h2><p class="subtitle">بحث عن طالب - تعديل / حذف</p>
+      <div style="display:flex;gap:10px"><input id="search" onkeyup="searchStudent()" placeholder="بحث عن طالب" style="flex:1"><button class="btn-gold" style="width:auto;margin:0;padding:12px 22px" onclick="show('add')">بحث</button></div>
+      <table><thead><tr><th>رقم الطالب</th><th>اسم الطالب</th><th>القسم</th><th>المستوى</th><th>الحالة</th><th>العمليات</th></tr></thead><tbody id="tbody"></tbody></table>
+      <div class="pagination"><button class="btn-white" style="width:auto">التالي</button><span>1 / 1</span><button class="btn-white" style="width:auto">السابق</button></div>
+      <button class="btn-gold" onclick="show('add')">+ إضافة طالب</button><button class="btn-outline" onclick="show('pay')">💳 الدفع الإلكتروني</button>
+    </div>
+  </div>
+
+  <!-- ===== طلب شهادة - النظام القديم ===== -->
+  <div id="cert" class="screen">
+    <div class="card"><h2>نموذج <span>التقديم</span></h2><p class="subtitle">ثلاث خطوات، احتفظ برقمك الوطني لمتابعة الطلب لاحقاً.</p>
+      <div class="steps"><div class="dot active">1</div><div class="line"></div><div class="dot">2</div><div class="line"></div><div class="dot">3</div></div>
+      <label>نوع المتقدم</label><div class="choices"><button type="button" class="selected" onclick="selectBtn(this,'applicant','سوداني')">سوداني</button><button type="button" onclick="selectBtn(this,'applicant','أجنبي')">أجنبي</button></div>
+      <label>الرقم الوطني</label><input id="certNational" maxlength="11"><small>11 رقماً</small>
+      <label>الاسم بالعربية (رباعي)</label><input id="certNameAr" placeholder="مثال: محمد أحمد علي حسن"><small>أربعة أسماء على الأقل</small>
+      <label>الاسم بالإنجليزية (رباعي)</label><input id="certNameEn" placeholder="Mohamed Ahmed Ali Hassan">
+      <button class="btn-gold" onclick="goCertStep2()">التالي ›</button><button class="btn-white" onclick="show('home')">إلغاء</button>
+    </div>
+  </div>
+
+  <div id="cert2" class="screen">
+    <div class="card"><h2>نموذج <span>التقديم</span></h2><p class="subtitle">اختر الدرجة العلمية ونوع الشهادة</p>
+      <div class="steps"><div class="dot">✓</div><div class="line done"></div><div class="dot active">2</div><div class="line"></div><div class="dot">3</div></div>
+      <label>الدرجة العلمية</label><div class="list"><button type="button" onclick="selectSingle(this,'degree','دبلوم')">دبلوم</button><button type="button" class="selected" onclick="selectSingle(this,'degree','بكالوريوس')">بكالوريوس</button><button type="button" onclick="selectSingle(this,'degree','الدبلوم فوق الجامعي')">الدبلوم فوق الجامعي</button><button type="button" onclick="selectSingle(this,'degree','ماجستير')">ماجستير</button></div>
+      <label>نوع الشهادة</label>
+      <div class="choices">
+        <button type="button" onclick="selectFee(this,'شهادة عامة باللغة العربية',15000)">شهادة عامة باللغة العربية<br><small>15,000 ج</small></button>
+        <button type="button" class="selected" onclick="selectFee(this,'شهادة عامة باللغة الانجليزية',18000)">شهادة عامة باللغة الانجليزية<br><small>18,000 ج</small></button>
+        <button type="button" onclick="selectFee(this,'شهادة تفاصيل باللغة العربية',20000)">شهادة تفاصيل باللغة العربية<br><small>20,000 ج</small></button>
+        <button type="button" onclick="selectFee(this,'شهادة تفاصيل باللغة الانجليزية',22000)">شهادة تفاصيل باللغة الانجليزية<br><small>22,000 ج</small></button>
+        <button type="button" onclick="selectFee(this,'شهادة عامة + تفاصيل اللغة العربية',30000)">شهادة عامة + تفاصيل اللغة العربية<br><small>30,000 ج</small></button>
+        <button type="button" onclick="selectFee(this,'شهادة عامة + تفاصيل اللغة الانجليزية',32000)">شهادة عامة + تفاصيل اللغة الانجليزية<br><small>32,000 ج</small></button>
+        <button type="button" onclick="selectFee(this,'2 شهادة عامة + 2 تفاصيل (عربي - انجليزي)',50000)">2 شهادة عامة + 2 تفاصيل (عربي - انجليزي)<br><small>50,000 ج</small></button>
+        <button type="button" onclick="selectFee(this,'شهادة عامة عربي + شهادة عامة انجليزي',35000)">شهادة عامة عربي + شهادة عامة انجليزي<br><small>35,000 ج</small></button>
+      </div>
+      <button class="btn-gold" onclick="goPay()">التالي - الدفع الإلكتروني ›</button><button class="btn-white" onclick="show('cert')">‹ السابق</button>
+    </div>
+  </div>
+
+  <!-- ===== الدفع الإلكتروني ===== -->
+  <div id="pay" class="screen">
+    <div class="card"><h2>الدفع <span>الإلكتروني</span></h2><p class="subtitle">أكمل الدفع إلكترونياً - بدون الذهاب للبنك</p>
+      <div class="steps"><div class="dot">✓</div><div class="line done"></div><div class="dot">✓</div><div class="line done"></div><div class="dot active">3</div></div>
+      <div class="summary"><div><span>الاسم:</span><b id="sumName">-</b></div><div><span>الرقم الوطني:</span><b id="sumId">-</b></div><div><span>الدرجة العلمية:</span><b id="sumDegree">بكالوريوس</b></div><div><span>نوع الشهادة:</span><b id="sumCert">شهادة عامة باللغة الانجليزية</b></div><div class="total"><span>المبلغ الكلي:</span><span id="sumFee">18,000 ج</span></div></div>
+      <label>اختر طريقة الدفع</label>
+      <div class="pay-methods"><button type="button" class="selected" onclick="selectPay(this,'بنكك - Bankak')">بنكك<small>بنك الخرطوم</small></button><button type="button" onclick="selectPay(this,'فوري - Fawry')">فوري<small>بنك فيصل - 134014447</small></button><button type="button" onclick="selectPay(this,'بطاقة بنكية')">بطاقة<small>Visa / Master</small></button></div>
+      <div id="bankakBox"><label>رقم حساب بنكك / رقم الموبايل</label><input placeholder="09XXXXXXXX"><label>رمز التأكيد OTP</label><input placeholder="أدخل الرمز المرسل لموبايلك"></div>
+      <div id="fawryBox" style="display:none"><label>رقم حساب الكلية - بنك فيصل</label><input value="134014447 - كلية الإمارات للعلوم والتكنولوجيا" readonly><label>رقم عملية فوري</label><input placeholder="أدخل رقم العملية من تطبيق فوري"></div>
+      <div id="cardBox" style="display:none"><label>رقم البطاقة</label><input placeholder="0000 0000 0000 0000"><label>تاريخ الانتهاء / CVV</label><input placeholder="MM / YY - CVV"></div>
+      <button class="btn-gold" onclick="payNow()">ادفع الآن - <span id="payBtnFee">18,000 ج</span></button><button class="btn-white" onclick="show('cert2')">‹ السابق</button>
+      <p style="text-align:center;font-size:12px;color:#aaa;margin-top:10px">دفع آمن - يتم تحويل المبلغ لحساب الكلية 134014447 تلقائياً</p>
+    </div>
+  </div>
+
+  <!-- ===== الإيصال ===== -->
+  <div id="receipt" class="screen">
+    <div class="card" style="text-align:center"><div style="width:80px;height:80px;background:rgba(201,162,39,.15);border:2px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:38px;margin:0 auto 12px">✓</div><h2>تم الدفع <span>بنجاح!</span></h2><p class="subtitle">تم استلام طلبك. احتفظ برقم المتابعة</p>
+      <div class="summary" style="text-align:right"><div><span>رقم الطلب:</span><b id="orderNum">EUST-2026-001</b></div><div><span>الاسم:</span><b id="recName">-</b></div><div><span>الرقم الوطني:</span><b id="recId">-</b></div><div><span>نوع الشهادة:</span><b id="recCert">-</b></div><div><span>طريقة الدفع:</span><b id="recPay">بنكك - Bankak</b></div><div><span>رقم العملية:</span><b id="recTrans">987654321</b></div><div><span>المبلغ:</span><b id="recFee">18,000 ج</b></div><div><span>الحالة:</span><b style="color:#7ED321">تم الدفع ✅ - قيد تجهيز الشهادة</b></div></div>
+      <div style="background:rgba(201,162,39,.12);border:1px solid var(--gold);border-radius:12px;padding:12px;font-size:14px;line-height:1.7"><b>متبقي عليك خطوة واحدة فقط:</b><br>اذهب إلى الكلية ومعك الرقم الوطني - لاستلام <b>البطاقة / الشهادة</b> فقط.</div>
+      <button class="btn-gold" onclick="window.print()">طباعة الإيصال / تحميل PDF</button><button class="btn-navy" onclick="alert('تم إرسال الإيصال لواتسابك')">إرسال الإيصال واتساب</button><button class="btn-white" onclick="show('track')">متابعة الطلب</button><button class="btn-white" onclick="location.reload()">تقديم طلب جديد</button>
+    </div>
+  </div>
+
+  <!-- ===== متابعة الطلب ===== -->
+  <div id="track" class="screen">
+    <div class="card"><h2>متابعة <span>الطلب</span></h2><p class="subtitle">أدخل رقمك الوطني لمعرفة حالة طلبك</p><label>الرقم الوطني</label><input placeholder="أدخل 11 رقم"><button class="btn-gold" onclick="alert('تم الدفع ✅ - طلبك قيد التجهيز - اذهب للكلية للبطاقة فقط')">بحث</button><button class="btn-white" onclick="show('home')">إلغاء</button><button class="btn-navy" onclick="show('cert')">تقديم جديد</button></div>
+  </div>
+
+  <!-- ===== التقارير ===== -->
+  <div id="reports" class="screen">
+    <div class="card"><h2>عرض <span>التقارير</span></h2><div class="cards2"><div class="c"><h3 id="r1">0</h3><p>تقرير التسجيل</p></div><div class="c"><h3 id="r2">0</h3><p>تقرير الرسوم</p></div><div class="c"><h3 id="r3">0</h3><p>تقرير الطلاب</p></div><div class="c"><h3>2026</h3><p>السنة الدراسية</p></div></div><p id="reportText" style="text-align:center;color:#ccc;margin:12px 0"></p><button class="btn-gold" onclick="window.print()">طباعة</button><button class="btn-white" onclick="alert('تم تصدير PDF')">تصدير PDF</button><button class="btn-navy" onclick="show('home')">🏠 الرئيسية</button></div>
+  </div>
+
+  <!-- ===== إعدادات ===== -->
+  <div id="settings" class="screen">
+    <div class="card"><h2>إعدادات <span>النظام</span></h2><label>اسم الكلية</label><input value="كلية الإمارات للعلوم والتكنولوجيا"><label>رقم حساب بنك فيصل - فوري</label><input value="134014447"><label>البريد الرسمي</label><input value="info@certificates.eust.edu.sd"><button class="btn-gold" onclick="alert('تم حفظ الإعدادات')">حفظ البيانات</button><button class="btn-white" onclick="show('home')">إلغاء</button></div>
+  </div>
+
+  <!-- ===== دخول ===== -->
+  <div id="login" class="screen">
+    <div class="card" style="text-align:center"><img src="logo.png" style="width:100px;height:100px;border-radius:50%;background:#fff;padding:3px;border:3px solid var(--gold);object-fit:cover"><h2 style="margin-top:12px">تسجيل <span>الدخول</span></h2><p class="subtitle">نظام إدارة تسجيل الطلاب</p>
+      <form onsubmit="login(event)"><label style="text-align:right">اسم المستخدم :</label><input id="user" placeholder="admin" required><label style="text-align:right">كلمة المرور :</label><input id="pass" type="password" placeholder="1234" required><button class="btn-gold">دخول</button><p id="msg" style="color:#FF8080;text-align:center;margin-top:10px"></p><p style="font-size:13px;color:#aaa">للتجربة : admin / 1234</p><button type="button" class="btn-white" onclick="show('home')">🏠 الرئيسية</button><button type="button" class="btn-white" onclick="show('cert')">تقديم جديد</button></form>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer"><h3><img src="logo.png"> كلية الإمارات للعلوم والتكنولوجيا</h3><p>تأسست عام - 2000</p><p class="gold">التواصل</p><p>الخرطوم - الجريف غرب - شارع الستين شرق - طلمبة النيل - بشائر سابقاً<br>+249925560004+ _ +249912584984<br>info@certificates.eust.edu.sd<br>التقديم متاح في أي وقت خلال اليوم</p><div style="display:flex;gap:8px;justify-content:center;margin-top:12px;flex-wrap:wrap"><button class="btn-gold" style="width:auto;padding:10px 18px" onclick="show('cert')">تقديم جديد</button><button class="btn-white" style="width:auto;padding:10px 18px" onclick="show('track')">متابعة الطلب</button><button class="btn-white" style="width:auto;padding:10px 18px" onclick="show('login')">تسجيل الدخول</button></div></div>
+
+<script>
+let students = JSON.parse(localStorage.getItem('students')) || [
+ {sid:'2024001',name:'أحمد محمد',dept:'علوم الحاسوب',level:'الثالث',fee:25000,status:'نشط'},
+ {sid:'2024002',name:'سارة علي',dept:'الهندسة',level:'الثاني',fee:25000,status:'نشط'},
+ {sid:'2024003',name:'خالد عبدالله',dept:'إدارة الأعمال',level:'الرابع',fee:12000,status:'معلق'}
+];
+let data={applicant:'سوداني',degree:'بكالوريوس',cert:'شهادة عامة باللغة الانجليزية',fee:18000,pay:'بنكك - Bankak'};
+function save(){ localStorage.setItem('students',JSON.stringify(students)); }
+function show(id){ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active')); document.getElementById(id).classList.add('active'); if(id==='students') showStudents(); if(id==='dashboard') loadDashboard(); if(id==='reports') loadReports(); window.scrollTo(0,0); }
+function login(e){ e.preventDefault(); if(document.getElementById('user').value==='admin'&&document.getElementById('pass').value==='1234'){ show('dashboard'); } else document.getElementById('msg').innerText='اسم المستخدم أو كلمة المرور خطأ'; }
+function saveStudent(e){ e.preventDefault(); students.push({sid:document.getElementById('sid').value,name:document.getElementById('name').value,dept:document.getElementById('dept').value,level:document.getElementById('level').value,email:document.getElementById('email').value,phone:document.getElementById('phone').value,fee:Number(document.getElementById('fee').value)||25000,status:'نشط'}); save(); alert('تم حفظ الطالب بنجاح'); show('students'); }
+function showStudents(){ let tb=document.getElementById('tbody'); if(!tb) return; tb.innerHTML=''; students.forEach((s,i)=>{ tb.innerHTML+=`<tr><td>${s.sid}</td><td>${s.name}</td><td>${s.dept}</td><td>${s.level}</td><td>${s.status}</td><td><button class="btn-gold" style="padding:6px 12px;font-size:13px;width:auto;margin:0" onclick="editStudent(${i})">تعديل</button> <button class="danger" onclick="deleteStudent(${i})">حذف</button></td></tr>`; }); }
+function deleteStudent(i){ if(confirm('هل تريد الحذف؟')){ students.splice(i,1); save(); showStudents(); } }
+function editStudent(i){ let n=prompt('اسم جديد',students[i].name); if(n){students[i].name=n; save(); showStudents();} }
+function searchStudent(){ let q=document.getElementById('search').value.toLowerCase(); document.querySelectorAll('#tbody tr').forEach(r=>{ r.style.display=r.innerText.toLowerCase().includes(q)?'':'none'; }); }
+function loadDashboard(){ document.getElementById('totalStudents').innerText=students.length; document.getElementById('totalFees').innerText=students.reduce((a,s)=>a+s.fee,0).toLocaleString(); }
+function loadReports(){ document.getElementById('r1').innerText=students.length; document.getElementById('r2').innerText=students.reduce((a,s)=>a+s.fee,0).toLocaleString(); document.getElementById('r3').innerText=students.filter(s=>s.status==='نشط').length; document.getElementById('reportText').innerText='عدد الطلاب الكلي: '+students.length+' - النشطين: '+students.filter(s=>s.status==='نشط').length; }
+function selectBtn(el,key,val){ el.parentElement.querySelectorAll('button').forEach(b=>b.classList.remove('selected')); el.classList.add('selected'); data[key]=val; }
+function selectSingle(el,key,val){ el.parentElement.querySelectorAll('button').forEach(b=>b.classList.remove('selected')); el.classList.add('selected'); data[key]=val; }
+function selectFee(el,val,fee){ el.parentElement.querySelectorAll('button').forEach(b=>b.classList.remove('selected')); el.classList.add('selected'); data.cert=val; data.fee=fee; document.getElementById('sumCert').innerText=val; document.getElementById('sumFee').innerText=fee.toLocaleString()+' ج'; document.getElementById('payBtnFee').innerText=fee.toLocaleString()+' ج'; }
+function selectPay(el,val){ document.querySelectorAll('.pay-methods button').forEach(b=>b.classList.remove('selected')); el.classList.add('selected'); data.pay=val; document.getElementById('bankakBox').style.display=val.includes('بنكك')?'block':'none'; document.getElementById('fawryBox').style.display=val.includes('فوري')?'block':'none'; document.getElementById('cardBox').style.display=val.includes('بطاقة')?'block':'none'; }
+function goCertStep2(){ if(!document.getElementById('certNational').value || !document.getElementById('certNameAr').value){ alert('فضلاً أكمل الرقم الوطني والاسم بالعربية'); return; } document.getElementById('sumName').innerText=document.getElementById('certNameAr').value; document.getElementById('sumId').innerText=document.getElementById('certNational').value; show('cert2'); }
+function goPay(){ show('pay'); }
+function payNow(){ let order='EUST-2026-'+Math.floor(100+Math.random()*900); document.getElementById('orderNum').innerText=order; document.getElementById('recName').innerText=document.getElementById('sumName').innerText; document.getElementById('recId').innerText=document.getElementById('sumId').innerText; document.getElementById('recCert').innerText=data.cert; document.getElementById('recPay').innerText=data.pay; document.getElementById('recFee').innerText=data.fee.toLocaleString()+' ج'; document.getElementById('recTrans').innerText=Math.floor(100000000+Math.random()*899999999); show('receipt'); }
+loadDashboard();
+</script>
+</body>
+</html>
